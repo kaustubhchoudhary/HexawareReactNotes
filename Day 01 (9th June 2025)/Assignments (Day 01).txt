@@ -1,0 +1,153 @@
+Assignments
+===========
+1] Create a functional component named "PersonalCard" that displays the following:
+
+A heading with your name
+
+A subheading with your profession (e.g., “Aspiring Web Developer”)
+
+A paragraph describing yourself in 2-3 lines
+
+A footer line saying: "This is a static JSX component."
+
+2] Add
+
+An image (use any public image URL or placeholder image)
+	- Place an image in public/images folder
+
+Another image at the bottom - Place the image in asets/images folder
+
+-----X-----X-----X-----X-----
+
+2] Assignment : Create a functional component named A02DeveloperInfo with the following data defined inside the component
+
+developerName (string) – e.g., "Ananya Roy"
+experience (integer) – e.g., 2
+isAvailable (boolean) – e.g., true
+
+---
+
+✅ Display in JSX:
+
+Show the developer’s name in an <h2> tag.
+Show the experience in a <p> tag like: "Experience: 2 years"
+Use a ternary operator to display:
+
+  "Status: Available for hire" if isAvailable is true.
+  "Status: Not available" if false.
+
+---
+
+📌 Expected Output Example:
+
+<h2>Ananya Roy</h2>
+<p>Experience: 2 years</p>
+<p>Status: Available for hire</p>
+
+---
+4] ✅ JSX Assignment: Function Creation in React
+Question: Create a React functional component called MathOperations. Inside it:
+
+Create a function using the function keyword named multiply that takes two numbers and returns their product.
+
+Create an arrow function named add that takes two numbers and returns their sum.
+
+Use these functions to:
+
+Multiply 5 and 3
+
+Add 10 and 7
+
+Display the results using JSX.
+
+5] Create a Skills List Using an Array
+
+Create a functional component named `SkillsList` with the following data defined inside the component:
+
+* `skills` (array of strings) – e.g.,
+  `["HTML", "CSS", "JavaScript", "React"]`
+
+---
+
+✅ Display in JSX:
+
+* Render the list of skills as an unordered list (`<ul>`), where each skill is inside a `<li>` tag.
+* Use the `.map()` method to generate the list items dynamically from the array.
+
+---
+
+📌 Expected Output Example:
+
+<ul>
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>JavaScript</li>
+  <li>React</li>
+</ul>
+
+---
+
+3] 📝 Assignment: Display Student Marks in a Table
+
+🎯 Objective:
+
+Use an array of objects and render it as a table in JSX.
+
+---
+
+✅ Task:
+
+Create a functional component named `A03StudentMarks` with the following data defined inside the component:
+
+const students = [
+    { name: "Abhishek", age: 25, isPresent: true },
+    { name: "Neha", age: 22, isPresent: false },
+    { name: "Gaurav", age: 21, isPresent: true },
+    { name: "Garima", age: 24, isPresent: false },
+    { name: "Uttam", age: 25, isPresent: false },
+  ];
+
+Display in a table, with headings : name, age and Attendance
+
+---
+
+✅ Display in JSX:
+
+* Render a table (`<table>`).
+* Add a table header with two columns: Name and Marks.
+* Use the `.map()` method to create a row (`<tr>`) for each student.
+
+---
+
+📌 Expected Output Example:
+
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Marks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Aman</td>
+      <td>85</td>
+    </tr>
+    <tr>
+      <td>Sneha</td>
+      <td>92</td>
+    </tr>
+    <tr>
+      <td>Ravi</td>
+      <td>76</td>
+    </tr>
+    <tr>
+      <td>Priya</td>
+      <td>89</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+---

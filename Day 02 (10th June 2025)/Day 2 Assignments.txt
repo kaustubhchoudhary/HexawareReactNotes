@@ -1,0 +1,109 @@
+Day 2 Assignments
+=================
+In folder components->assignments, create a folder day2.
+ 
+So, the folder structure becomes: components->assignments->day2
+
+Assignment 1] Create Functional Component: A01ArrayMethods
+
+#🔸 Dataset: `products`
+
+const products = [
+  { id: 1, name: "Sony Laptop", price: 50000, rating: 4.5 },
+  { id: 2, name: "Mi Phone", price: 15000, rating: 4.0 },
+  { id: 3, name: "Mi Tablet", price: 15000, rating: 3.8 },
+  { id: 4, name: "Sony Monitor", price: 10000, rating: 4.2 }
+  { id: 5, name: "Sony Refrigerator", price: 30000, rating: 3.2 }
+  { id: 6, name: "Sony Washing Machine", price: 25000, rating: 2.2 }
+  { id: 7, name: "LG TV", price: 55000, rating: 1.2 }
+];
+
+---
+Part 1:
+
+#💻 Use: map()
+
+* Show each product in a table heading  S.No, name, price, rating.
+
+---
+
+#💻 Part 2: filter()
+
+* Show only Sony products whose rating is greater than 4
+
+---
+
+#💻 Part 3: find()
+
+* Find and display the first product that has price <=20000 
+
+Handle if there is no product found for a given condtion
+
+---
+
+#💻 Part 4: reduce()
+
+* Calculate the total cost of all products.
+* Also show average product price.
+
+> Bonus: Round average to 2 decimal places (averagePrice.toFixed(2))
+
+---
+
+Assignment 2]:
+
+Create a functional component named `A02ProductPrices` which does the following:
+
+#✅ Given Data:
+
+const products = [
+  { id: 1, name: "Laptop", price: 55000 },
+  { id: 2, name: "Mobile", price: 0 },
+  { id: 3, name: "Tablet", price: 23000 },
+  { id: 4, name: "Monitor", price: undefined },
+];
+
+#🔧 Instructions:
+
+1. Use `.filter()` to exclude products that have 0 or undefined price.
+2. If no products are available after filtering, display:
+
+   <p>No valid products to display.</p>
+
+3. If products are present, display them using `.map()` like:
+
+   <p>Product: Laptop - ₹55000</p>
+
+4. Use at least one ternary or logical AND operator in JSX for conditional rendering.
+-----X-----X-----X-----
+
+Assignment 3: Create A03ProductComponents.jsx
+
+Create three functional components that share a single `product` object defined outside the components, and practice default and named exports.
+
+Instructions:
+1. Create a file named `A03ProductComponents.jsx`.
+2. Define a `product` object at the top of the file outside all components:
+
+const product = { id: 101, name: "Smartphone", price: 29999, inStock: true };
+
+3. Create three functional components:
+   * `ProductInfo`
+
+     * Displays: `"Product ID: <id>, Name: <name>"`
+     * Export this component as the default export.
+   * `ProductPrice`
+
+     * Displays: `"Price: ₹<price>"`
+     * Export this component as a named export.
+
+   * `ProductStock`
+     * Displays: `"Stock: Available"` if `inStock` is `true`, else `"Stock: Out of stock"`
+     * Export this component as a named export.
+
+4. Use the shared `product` object inside all three components to display relevant data.
+
+5. Use these in App.jsx
+
+* One file exporting one default and two named components.
+----X-----X-----X-----

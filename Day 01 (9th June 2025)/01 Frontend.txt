@@ -1,0 +1,104 @@
+Frontend Notes
+==============
+
+Software Application
+====================
+Every application has generally 3 parts:
+1. Frontend (Client) : That the end user interacts with
+2. Backend (Server) : The data processing unit
+	2.1 Server Side Code
+	2.2 Server Side DB
+
+-----X-----X-----X-----
+Frontend
+========
+At the least every developer must learn the following 3 languages for web development:
+1. HTML
+2. CSS
+3. JavaScript
+
+Brief
+-----
+HTML
+====
+- HTML stands for Hyper Text Markup Language
+- The latest version is HTML 5.0
+- HTML describes the content/structure of Web pages.
+- Content means text, images, lists, table, form, media, audio, video, animation etc.
+
+CSS
+===
+- CSS stands for Cascading Style Sheets
+- The latest version is CSS 3.0
+- CSS provides styling to HTML Elements
+- If we want to set the layout, font color, background color, increase/decrease the font size we use CSS
+
+JavaScript
+==========
+- JavaScript is a client/server side scripting language used to manipulate HTML and CSS, and do server coding
+- It is also used to process and validate data at client side (browser)
+- The most used version is JavaScript ES6 (aka Modern JavaScript)
+- JS ES6 is the base for learning Angular, React, VUE, Node, Express etc
+
+Frameworks and Libraries
+========================
+Bootstrap
+---------
+- Bootstrap is a framework of CSS
+- It is used to quickly add CSS to our web elements
+- It makes our web pages responsive
+- What it means is that with it the web pages adjust according to the screen
+- The latest version is Bootstrap 5
+
+JQuery
+------
+- JQuery is a popular, lightweight JavaScript library.
+- It can modify HTML elements, change content, attributes, and styles.
+- It can create smooth animations and transitions, adding visual appeal to websites.
+- It can Apply various visual effects like fading, sliding, and toggling elements.
+- Its latest version is 3.7.1
+
+AJAX
+----
+- AJAX stands for Asynchronous JavaScript and XML
+- Its main task is to facilitates data exchange between web browsers and servers
+- It enables dynamic content updates without full page reloads.
+
+Frameworks/Libraries of JavaScript
+----------------------------------
+1. Angular
+2. React
+3. Express
+4. Node
+5. Vue
+6. Nest
+-----X-----X-----X-----
+Roles for frontend
+==================
+1. Frontend/UI Designer
+-----------------------
+Skills:
+
+1. Graphic Designing 
+2. HTML
+3. CSS
+4. CSS frameworks
+
+2. Frontend Developer
+---------------------
+Skills:
+
+1. HTML
+2. CSS and its frameworks
+3. JavaScript and its frameworks
+
+3. UX Designer
+-----------------
+User Experience designer
+
+1. Human Psychology
+2. Behavior
+3. Art of Persuation
+4. Color and combination
+5. The person should be good in research
+-----X-----X-----X-----X-----

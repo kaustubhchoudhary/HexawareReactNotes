@@ -1,0 +1,168 @@
+Introduction to React
+=====================
+What is React?
+--------------
+> React is an Open Source JavaScript library for building user interfaces and Single Page Application (SPAs)
+> It is not a framework, it is a library.
+> It has one and only one task, that is of creating user interfaces.
+> It was created by Jordan Walke at Facebook (now Meta)
+
+React does not focus on other aspects of our application such as Routing or HTTP request, it is responsible only for building rich UI. All these things are handled by other libraries.
+
+Why learn React?
+----------------
+=> Created and maintained by Facebook
+=> More than 100k stars on Github
+=> Huge community
+=> In demand skillset
+
+More on - Why React?
+--------------------
+=> Seamlessly integrate react into any of your applications 
+=> Be it just a portion of your page, or a complete page, or even an entire application itself
+=> React Native can be used for Mobile Applications
+=> React follows component based architecture
+
+Component
+=========
+A component in React is a reusable, self-contained unit of UI that manages its own structure, behavior, and state, returning JSX to render on the screen.
+
+State => Variables
+Structure => HTML and CSS
+Behaviour => Methods
+
+Here we break the application into small encapsulated parts which can then be composed to form more complex UI.
+
+Refer Image: 01_01.png
+
+Reusable code
+-------------
+We can make one component - article and use it on react, angular and vue by passing the right data
+
+Refer Image: 01_02.png
+
+Programming Paradigm
+====================
+React is declarative
+
+In programming, declarative and imperative are two different paradigms.
+
+Imperative Paradigm
+-------------------
+=> Imperative Programming means (How to Do It)
+=> In an imperative approach, a programmer explicitly defines how things should happen step by step.
+=> The developer is responsible for managing the UI updates manually
+
+Example: Imperative Approach (Vanilla JavaScript)
+
+const button = document.getElementById("myButton");
+button.addEventListener("click", () => {
+    const message = document.getElementById("message");
+    message.textContent = "Hello, World!";
+});
+
+Here, we manually select elements, add event listeners, and update the DOM.
+
+Declarative Paradigm
+--------------------
+=> Declarative Programming means (What to Do)
+=> In a declarative approach, we describe what the UI should look like, and React handles the updates automatically.
+=> React determines the best way to update the UI efficiently.
+
+import { useState } from "react";
+
+function App() {
+  const [message, setMessage] = useState("");
+
+  return (
+    <div>
+      <button onClick={() => setMessage("Hello, World!")}>Click Me</button>
+      <p>{message}</p>
+    </div>
+  );
+}
+
+export default App;
+
+=> Here, we declare what the UI should be based on state (message).
+=> React automatically updates the UI when the state changes.
+=> We don’t directly manipulate the DOM; React handles it behind the scenes.
+
+Why is React Declarative?
+-------------------------
+=> We focus on what the UI should be, not how to update it.
+=> React manages the DOM updates efficiently using Virtual DOM.
+=> Code becomes more readable, maintainable, and less error-prone.
+=> Tell React what we want and React with its ReactDOM library will build the actual UI
+=> React will handle efficiently updating and rendering the components.
+=> DOM updates are handled gracefully in React.
+
+Prerequisites
+=============
+React is a frontend library that uses:
+
+=> HTML
+=> CSS
+=> Bootstrap
+=> JavaScript (ES6) features
+	- let & const, template literals
+	- functions, 'this' keyword, default parameters
+	- arrays, object literals
+	- filter, map and reduce
+	- arrow functions, event handlers 
+	- rest, spread operators, and destructuring
+=> While react apps can be created solely with JavaScript ES6, we can also use TypeScript. 
+=> In the later learning TypeScript is also essential, otherwise not.
+
+Course Content
+==============
+1. Fundamentals 
+2. HTTP
+3. Routing
+4. Redux
+5. Utilities
+-----X-----X-----X-----
+React v/s JavaScript
+====================
+=> Oppose to Vanilla JavaScript, React has a concept called components 
+=> React combines all HTML, CSS and JavaScript by features instead of separating HTML, CSS and JavaScript.
+=> React.js manages updating the DOM or Document Object Model with the components written by us.
+
+Separation of Concerns
+----------------------
+=> In a normal web application, the html pages, css to style the pages and JS for the pages are all lept separete
+=> In React, instead of keeping HTML, CSS and JavaScript separate, they are bundled together in a component
+
+Refer figure: 01_03.png
+-----X-----X-----X-----
+React Version History
+=====================
+** Major Releases only
+
+| Version| Release Date | Key Features|
+| ------ | ------------ | ------------|
+| 0.3    | July 2013 | Initial public release by Facebook |
+| 0.9    | May 2014  | Event system improvements, bug fixes |
+| 0.12   | Nov 2014  | `React.createClass`, mixins (now deprecated) |
+| 0.14   | Oct 2015  | Split React into `react` and `react-dom`, stateless functional components |
+| 15.0   | Mar 2016  | Renamed to v15 to sync with React Native, better error messages |
+| 16.0   | Sep 2017  | Major rewrite (Fiber architecture), fragments, error boundaries |
+| 16.3   | Mar 2018  | New Context API, `createRef` |
+| 16.8   | Feb 2019  | 🔥 Hooks (`useState`, `useEffect`, etc.) introduced |
+| 17.0   | Oct 2020  | No new features, but big changes to event delegation and gradual upgrade path  |
+
+| 18.0   | Mar 2022  | 🔥 Concurrent rendering, automatic batching, `useTransition`, `useDeferredValue`, new root API (`createRoot`) |
+
+| 18.2   | Jun 2022  | Stable release of React 18, minor enhancements |
+
+| 19 (in development)| TBD 2025 | Expected to include new compiler (React Compiler), better performance, and new features (e.g. enhanced signals support) |
+
+---
+
+📌 Key Milestones
+
+Hooks (16.8): Changed how React components are written, moving away from class components.
+Concurrent Mode (18): Made rendering more interruptible and adaptive.
+React Server Components (Experimental): Enabling server-driven UIs for performance.
+React Compiler (Future): Automatically optimize rendering (previewed at React Conf 2024).
+-----X-----X-----X-----X-----

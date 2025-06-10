@@ -1,0 +1,542 @@
+JavaScript Refresher
+=====================
+What is JavaScript?
+===================
+JavaScript is a client-side, as well as a server-side scripting language.
+ 
+On the client side it can be used to:
+ - animate images
+ - react to an event
+ - validate user input
+ - control multimedia
+ - exchange data with the server
+ - design complex user interfaces
+ - brings modularity while building pages
+ - Update the contents of a web page dynamically etc
+
+Why Study JavaScript?
+=====================
+JavaScript is one of the 3 languages all Softwares Engineers must learn. 
+
+Some facts:
+
+1. 98.9% of all websites worldwide use JavaScript on the client side for webpage behavior.
+
+2. As much as 14,44,231 libraries have been created in JavaScript
+
+3. JavaScript has been consistently one of the top 5 programming languages in the world (others being C, Java, Python and Dotnet).
+Source: https://www.techrepublic.com/article/tiobe-index-language-rankings/
+Source: https://www.tiobe.com/tiobe-index/
+
+4. Every company that provides a comprehensive end to end solution - uses JavaScript.
+
+5. It is the basis of popular languages such as Angular, Typescript, React, Node, Express etc.
+
+6. JavaScript is also used in Software Testing as a Scripting Language for QA Automation Tools (such as Selenium)
+
+History
+=======
+1.	JavaScript was written by Brendan Eich in 1995 for Netscape Navigator (now Mozilla Firefox)
+2.	It became an ECMA standard in 1997.
+3.	ECMA-262 is the official name of the standard. ECMAScript is the official name of the language.
+
+What is ECMA
+============
+ECMA stands for European Computer Manufacturers Association.  
+
+It is now known as Ecma International, an organization responsible for standardizing various computing technologies, including ECMAScript, which is the foundation of JavaScript.
+
+JavaScript versions
+===================
+- The Original JavaScript : ES1 ES2 ES3 (1997-1999)
+- The First Main Revision : JS5/ES5 (2009)
+- The Second Revision : JS6/ES6 (2015)
+- Yearly Additions (2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024)
+
+- ES5 and ES6 are the 2 most popular JS versions
+
+- JS ES5 is also known as Vanilla JavaScript, or plain JavaScript, or Basic JavaScript
+- JS ES6 is also known as Modern JavaScript.
+
+Modern JavaScript is basis for learning JavaScript Frameworks and Libraries (MEAN, MERN etc)
+
+JavaScript Frameworks/Libraries
+===============================
+1. Angular
+- It is one of the most powerful, efficient, and open-source JavaScript frameworks.
+- It is developed and maintained by Google. 
+- It is used to develop Single Page Applications (SPAs) where part of the UI load asynchronously without having to reload the entire page. 
+
+2. React
+- It is a library used to create User Interfaces
+- It is open source 
+- It is developed and maintained by Meta. 
+- It is used to develop both – web pages (as React JS) and hybrid mobile apps (as React Native)
+
+3. Vue
+- Though developed in the year 2016, this JavaScript framework has already made its way into the market and has proven its worth by offering various features. 
+- Its dual integration mode is one of the most attractive features for the creation of high-end SPA or Single Page Application. 
+- It is a much reliable platform for developing cross-platform applications
+
+4. Node
+- Node.js is a server-side JavaScript run-time environment, which works on cross platforms
+- The framework is capable of driving asynchronous I/O with its event-driven architecture. 
+- It works in the JavaScript Runtime environment and hence shows similar properties of JAVA like threading, packages, forming of loops etc
+
+5. Express
+- It is a back end web application framework for building RESTful APIs with Node.js, 
+- It was released as free and open-source software under the MIT License. 
+- It is designed for building web applications and APIs.
+- It has been called the de facto standard server framework for Node.js
+
+6. Typescript
+- It is developed and maintained by Microsoft.
+- It is a superset of JavaScript
+- It brings the concept of static typing into JS.
+- It transpiles into plain JavaScript with transpilers.
+-----X-----X-----X-----
+What are we learning?
+=====================
+We will be using:
+	- Vanilla JavaScript (JS ES5) for client side validations
+	- Advanced JavaScript (JS ES6) for React
+-----X-----X-----X-----
+How to?
+=======
+	- JavaScript runs on the browser, there is no need to set up a separate dev environment to use it.
+	- However if you are using an advance framework like Angular, or React you have to set up Node, NPM and respective CLI.
+
+Ways to include JavaScript
+--------------------------
+There are 3 ways to use JavaScript:
+
+1. Inline JavaScript - JavaScript code in event handlers
+
+ex: <button onclick="alert('Hello World!')">Click Me</button>
+
+2. Internal JavaScript - JavaScript code in script tag
+ex: 
+<head>
+	<script>
+		function alertBox(message){
+			alert(message)
+		}
+	</script>
+</head>
+<body>
+	<button onclick="alertBox('Hi everyone')">Click Me</button>
+</body>
+
+3. External JavaScript - JavaScript code in external file
+- Create an external file with any name and .js extension (say: script.js)
+- inlcude this file in the HTML wth script tag 
+
+<script src="path to script.js"></script>
+------X-----X-----X-----X-----
+Event Handling
+==============
+Event
+-----
+An event in JavaScript is an action or occurrence that happens in the browser.
+It could be initiated by the user, or by the inner working of the browser.
+
+Event Listener
+--------------
+- An event listener is a function that responds to the events 
+- When the specified event happens, the event listener executes a callback function to handle that event.
+
+Here are some common events in JavaScript:
+
+Here’s a categorized list of JavaScript functions based on different event types:  
+
+1. Mouse Events  
+- `onclick`  
+- `ondblclick`  
+- `onmousedown`  
+- `onmouseup`  
+- `onmouseover`  
+- `onmouseout`  
+- `onmousemove`  
+- `onmouseenter`  
+- `onmouseleave`  
+- `oncontextmenu`  
+
+2. Keyboard Events  
+- `onkeydown`  
+- `onkeypress` (deprecated)  
+- `onkeyup`  
+
+3. Form Events  
+- `onfocus`  
+- `onblur`  
+- `onchange`  
+- `oninput`  
+- `onsubmit`  
+- `onreset`  
+
+4. Clipboard Events  
+- `oncopy`  
+- `oncut`  
+- `onpaste`  
+
+5. Window Events  
+- `onload`  
+- `onunload`  
+- `onresize`  
+- `onscroll`  
+- `onerror`  
+- `onbeforeunload`  
+
+6. Drag & Drop Events  
+- `ondrag`  
+- `ondragstart`  
+- `ondragend`  
+- `ondragenter`  
+- `ondragleave`  
+- `ondragover`  
+- `ondrop`  
+
+7. Media Events  
+- `onplay`  
+- `onpause`  
+- `onended`  
+- `onvolumechange`  
+- `onwaiting`  
+- `oncanplay`  
+- `oncanplaythrough`  
+- `onseeking`  
+- `onseeked`  
+
+8. Touch Events (For Mobile Devices)  
+- `ontouchstart`  
+- `ontouchmove`  
+- `ontouchend`  
+- `ontouchcancel`  
+
+9. Focus & Blur Events  
+- `onfocus`  
+- `onblur`  
+
+10. Miscellaneous Events  
+- `oncontextmenu`  
+- `onwheel`  
+- `onhashchange`  
+- `onmessage`  
+- `onpopstate`  
+
+These events help in handling interactions and actions within the webpage.
+-----X-----X-----X-----X-----
+HTML DOM
+========
+What is DOM?
+- The Document Object Model (DOM) represents the structure of an HTML document as a tree of objects.
+- JavaScript can manipulate the DOM to dynamically change content, structure, and styles of a webpage.
+- JavaScript provides several methods to access HTML elements in the DOM, and then manipulate them.
+
+Please refer image: 01_html_dom.png
+-----X-----X-----X-----X-----
+JavaScript Selectors
+====================
+JavaScript Selectors are methods used to select the element(s), so that they can manipulated.
+
+There are 6 selectors:
+
+1. getElementById(id)
+
+2. getElementsByClassName(className)
+
+3. getElementsByTagName(tagName)
+
+4. querySelector(selector)
+
+5. querySelectorAll(selector)
+
+6. getElementsByName(name)
+
+getElementById(id)
+------------------
+- It selects an element by its unique ID.
+ex: document.getElementById("myId");
+
+getElementsByClassName(className)
+---------------------------------
+- It selects all elements with the specified class name. Returns an HTMLCollection.
+- Ex: document.getElementsByClassName("myClass");
+
+getElementsByTagName(tagName)
+- It selects all elements with the specified tag name. Returns an HTMLCollection.
+- Ex: document.getElementsByTagName("p");
+
+querySelector(selector)
+-----------------------
+- It selects the first element that matches the specified CSS selector.
+- Ex: document.querySelector(".myClass");
+
+querySelectorAll(selector)
+--------------------------
+- It selects all elements that match the specified CSS selector. Returns a NodeList.
+- Ex: document.querySelectorAll(".myClass");
+
+getElementsByName(name)
+-----------------------
+- It selects all elements with the specified name attribute. Returns a NodeList.
+- Ex: document.getElementsByName("myName");
+
+Variable declaration
+====================
+In JavaScript, variables can be declared using three main keywords: var, let, and const.
+
+1. var: 
+- Used in older JavaScript version
+- Use for backward compatibility
+- It has function scope, not block scope
+- This type of scoping often leads to some unexpected behaviors.
+
+Global Scope
+------------
+ex:
+
+if (true) {
+    var x = 10;
+}
+console.log(x); // Output: 10
+
+Even though x is declared inside the if block, it is still accessible outside of the block because var does not have block scope. Instead, it has function scope or global scope when not inside a function.
+
+2. let
+- Introduced in ES6 (2015).
+- Has block scope (it is only available within the block {} it is defined in).
+- let addresses the limitations and confusing behavior of var, particularly in terms of block scoping and hoisting.
+
+Block scoping:
+ex:
+if (true) {
+    let x = 10; // x is only accessible inside this block
+    console.log(x); // Output: 10
+}
+console.log(x); // Error: x is not defined
+
+No redeclaration
+----------------
+let c = 5;
+let c = 10; // Error: Identifier 'c' has already been declared
+c = 10; // This is allowed, as it's just reassignment
+console.log(c); // Output: 10
+
+In contrast, var allows re-declaration.
+
+const
+-----
+- The value cannot be reassigned or re-declared after initialization.
+- For objects and arrays, properties can be modified, but the reference itself can't be changed.
+
+ex:
+
+const z = 10;
+z = 20; // not allowed (error)
+
+const obj = { name: "Alice" };
+obj.name = "Bob"; // allowed (object properties can be changed)
+obj = {}; // not allowed (reassigning the reference causes an error)
+
+Functions
+=========
+For events we create functions that work as event handlers.
+As JS is loosely typed, there is no:
+- Return type
+- Parameter types
+
+1. Basic Function Declaration
+
+function greet(name) {
+    return "Hello, " + name + "!";
+}
+
+console.log(greet("Sujoy")); // Output: Hello, Alice!
+
+2. Function Expression
+
+const add = function (a, b) {
+    return a + b;
+};
+
+console.log(add(5, 3)); // Output: 8
+
+3. Arrow Function
+
+const multiply = (a, b) => a * b;
+
+console.log(multiply(4, 6)); // Output: 24
+-----X-----X-----X-----
+Fat Arrow Functions
+===================
+- Arrow functions, introduced in ES6 (ECMAScript 2015), are a more concise way to write function expressions in JavaScript. 
+- They also behave differently from traditional functions, especially in terms of handling this, making them useful in specific situations.
+
+Key Features of Arrow Functions:
+
+1. Concise Syntax:
+   - Arrow functions provide a shorter syntax compared to traditional function expressions.
+   - You can omit the function keyword and curly braces {} in simple cases.
+
+   // Traditional function
+   let sum = function(a, b) {
+       return a + b;
+   };
+   
+   Syntax 1:
+   
+   let sum = (a, b) => {
+       return a + b;
+   };
+
+   Syntax 2:
+   
+   let sum = (a, b) => a + b;
+
+   - If the function has a single argument, we can omit the parentheses ().
+   
+   let square = x => x * x; // No need for parentheses around x
+
+   - For multiple parameters or zero parameters, parentheses are required.
+   
+   let greet = () => console.log("Hello, world!");
+   let add = (a, b) => a + b;
+
+2. Implicit Return:
+   - If the function body is a single expression, the result is automatically returned without the need for the return keyword.
+  
+   let multiply = (x, y) => x * y; // No need for return
+
+   - For multi-line function bodies, you need curly braces and an explicit return.
+   
+   let multiply = (x, y) => {
+       let result = x * y;
+       return result;
+   };
+
+Use Cases
+---------
+- Callbacks: Arrow functions are often used as callback functions
+
+const button = document.getElementById("myButton");
+
+button.addEventListener("click", () => {
+   console.log("I am clicked"); 
+});
+
+- Array Methods: They are commonly used in array methods like map(), filter(), and reduce() for brevity.
+   
+   let numbers = [1, 2, 3, 4, 5];
+   let squares = numbers.map(n => n * n); // Short and clean syntax
+-----X-----X-----X-----X-----
+Arrays
+======
+Array Declaration
+-----------------
+let cars = ["Maruti", "Kia", "Hector"];
+console.log(cars); // Output: ["Maruti", "Kia", "Hector"]
+
+Access elements
+---------------
+console.log(cars[0]); // Output: Maruti
+console.log(cars[2]); // Output: Hector
+
+Adding Elements
+---------------
+a. To end of array:
+cars.push("Toyota");
+console.log(cars); // Output: ["Maruti", "Kia", "Hector", "Toyota"]
+
+b. To start of array
+cars.unshift("Hyundai");
+console.log(cars); // Output: ["Hyundai", "Maruti", "Kia", "Hector", "Toyota"]
+
+c. At a specific index
+cars.splice(2, 0, "Ford");
+console.log(cars); // Output: ["Hyundai", "Maruti", "Ford", "Kia", "Hector", "Toyota"]
+
+Removing Elements
+-----------------
+a. From end of array
+cars.pop();
+console.log(cars); // Output: ["Hyundai", "Maruti", "Ford", "Kia", "Hector"]
+
+b. From start of array
+cars.shift();
+console.log(cars); // Output: ["Maruti", "Ford", "Kia", "Hector"]
+
+c. From a specific index
+cars.splice(1, 1); // Removes 1 element at index 1
+console.log(cars); // Output: ["Maruti", "Kia", "Hector"]
+
+Modifying Elements
+------------------
+cars[1] = "MG";
+console.log(cars); // Output: ["Maruti", "MG", "Hector"]
+
+Iterating
+---------
+cars.forEach(car => console.log(car));
+
+Sorting and Reversing
+---------------------
+cars.sort(); // Sorts alphabetically
+console.log(cars); // Output: ["Hector", "MG", "Maruti"]
+
+cars.reverse();
+console.log(cars); // Output: ["Maruti", "MG", "Hector"]
+
+Mapping
+-------
+let uppercaseCars = cars.map(car => car.toUpperCase());
+console.log(uppercaseCars); // Output: ["MARUTI", "MG", "HECTOR"]
+
+Filtering
+---------
+let filteredCars = cars.filter(car => car.startsWith("M"));
+console.log(filteredCars); // Output: ["Maruti", "MG"]
+-----X-----X-----X-----X-----
+Objects
+=======
+let car = {
+    brand: "Maruti",
+    model: "Swift",
+    year: 2021,
+    color: "Red",
+    start: function () {
+        return "Car started!";
+    }
+};
+
+Adding Properties
+-----------------
+car.price = 800000; // Adding a new property
+console.log(car.price); // Output: 800000
+
+Adding Methods
+--------------
+// Adding a new method
+car.accelerate = function () {
+    return "Car Accelerated!";
+};
+
+Accessing Properties
+--------------------
+console.log(car.brand); // Output: Maruti
+console.log(car["model"]); // Output: Swift
+
+Modifying Properties
+--------------------
+car.color = "Blue"; // Modifying an existing property
+console.log(car.color); // Output: Blue
+
+Deleting Properties
+-------------------
+delete car.year;
+console.log(car.year); // Output: undefined
+
+Calling Methods
+---------------
+console.log(car.start()); // Output: Car started!
+-----X-----X-----X-----

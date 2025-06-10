@@ -1,0 +1,404 @@
+Day 02 Notes
+============
+Programing Paradigm
+===================
+React is declarative
+
+In programming, declarative and imperative are two different paradigms.
+
+Imperative Paradigm
+-------------------
+=> Imperative Programming means (How to Do It)
+=> In an imperative approach, a programmer explicitly defines how things should happen step by step.
+=> The developer is responsible for managing the UI updates manually
+
+Example: Imperative Approach (Vanilla JavaScript)
+
+const button = document.getElementById("myButton");
+button.addEventListener("click", () => {
+    const message = document.getElementById("message");
+    message.textContent = "Hello, World!";
+});
+
+Here, we manually select elements, add event listeners, and update the DOM.
+
+Declarative Paradigm
+--------------------
+=> Declarative Programming means (What to Do)
+=> In a declarative approach, we describe what the UI should look like, and React handles the updates automatically.
+=> React determines the best way to update the UI efficiently.
+
+import { useState } from "react";
+
+function App() {
+  const [message, setMessage] = useState("");
+
+  return (
+    <div>
+      <button onClick={() => setMessage("Hello, World!")}>Click Me</button>
+      <p>{message}</p>
+    </div>
+  );
+}
+
+export default App;
+
+=> Here, we declare what the UI should be based on state (message).
+=> React automatically updates the UI when the state changes.
+=> We don’t directly manipulate the DOM; React handles it behind the scenes.
+
+Why is React Declarative?
+-------------------------
+=> We focus on what the UI should be, not how to update it.
+=> React manages the DOM updates efficiently using Virtual DOM.
+=> Code becomes more readable, maintainable, and less error-prone.
+=> Tell React what we want and React with its ReactDOM library will build the actual UI
+=> React will handle efficiently updating and rendering the components.
+=> DOM updates are handled gracefully in React.
+-----X-----X-----X-----
+Array Methods
+=============
+
+## 📝 Notes: 4 Useful Array Methods in React
+
+| Method     | Purpose                       | Syntax Example                                |
+| ---------- | ----------------------------- | --------------------------------------------- |
+| `map()`    | Transforms each item          | `array.map(item => <JSX>)`                    |
+| `filter()` | Filters items by condition    | `array.filter(item => condition)`             |
+| `find()`   | Finds the first matching item | `array.find(item => condition)`               |
+| reduce()| Aggregates array to a value|`array.reduce((acc, curr, index, arr) => acc + value, 0)`|
+
+In reduce ac and curr are compulsory while index and arr are optional
+
+| Method     | Returns                                 | Type                              |
+| ---------- | ----------------------------------------| --------------------------------- |
+| `map()`    | A new array of transformed values       | `Array`                           |
+| `filter()` | A new array with only matching elements | `Array`                           |
+| `find()`   | The first matching item, or `undefined` | Single `Object` or `undefined`    |
+| `reduce()` | A single computed value (any type)      | `Number`, `String`, `Object` etc. |
+
+
+**Remove return
+
+Ex data set 1:
+
+const students = [
+  { id: 1, name: "Riya", score: 85 },
+  { id: 2, name: "Amit", score: 60 },
+  { id: 3, name: "Neha", score: 95 },
+  { id: 4, name: "Kunal", score: 40 }
+];
+
+Class programs:
+✅ Program 1: map() – List all students
+✅ Program 2: filter() – Show only passed students (score >= 50)
+✅ Program 3: find() – Find student with score > 90
+✅ Program 4: reduce() 
+	– Calculate total score
+	– Calculate average score
+-----X-----X-----X-----
+Conditional Rendering
+=====================
+🔹 What is Conditional Rendering? 
+ 
+Conditional rendering in React means displaying UI elements based on conditions, similar to `if-else` statements in JavaScript. Instead of rendering everything, React only renders components or elements that meet a condition. 
+
+Ways to do conditional rendering:
+
+1. Using if statements (inside or outside JSX)
+
+2. Using Ternary operator (condition ? trueJSX : falseJSX)
+
+3. Using Logical AND operator (condition && jsx)
+
+4. Using Logical OR operator (condition || jsx) (less common)
+
+5. Using functions to return JSX conditionally
+
+Behavior of `&&`
+- The `&&` operator returns the first falsy value or the last truthy value if all are truthy.
+- It does not return `true` or `false` unless the actual values being evaluated are `true` or `false`.
+
+#Examples:
+
+console.log(true && false);   // false  (first falsy value)
+console.log(false && true);   // false  (first falsy value)
+console.log(true && "Hello"); // "Hello" (last truthy value)
+console.log("Hi" && "Hello"); // "Hello" (last truthy value)
+console.log(0 && "Hello");    // 0 (first falsy value)
+console.log("" && "Hello");   // "" (first falsy value)
+console.log(null && "Hi");    // null (first falsy value)
+console.log(undefined && "Hi"); // undefined (first falsy value)
+
+- If the first operand is falsy, it is immediately returned.
+- If the first operand is truthy, the second operand is returned.
+
+In React (and JavaScript in general), values like 0, null, "" (empty string), undefined, and false are called falsy values, meaning they are treated as false in conditional rendering.
+
+Ex data set 1:
+
+const students = [
+  { id: 1, name: "Riya", score: 85 },
+  { id: 2, name: "Amit", score: 60 },
+  { id: 3, name: "Neha", score: 95 },
+  { id: 4, name: "Kunal", score: 40 }
+];
+
+Class programs:
+✅ Program 1: Show students who scored above 70
+-----X-----X-----X-----
+Export/Import
+=============
+There are 3 types of exports/imports:
+
+1. Default export & import
+2. Named export & import
+3. Mixed export & import
+
+---
+
+🅰️ Default Export & Import
+
+If you export something as default:
+
+// GreetF.js
+const GreetF = () => <h1>Hi</h1>;
+export default GreetF;
+
+You can import it in either way:
+
+import MyComponent from "./components/GreetF"; // alias name
+import GreetF from "./components/GreetF";      // same name
+
+Then use it as:
+
+<MyComponent /> or <GreetF />
+
+
+✅ Correct Point:
+You cannot do this in one line:
+
+export default const GreetF = () => <h1>Hi</h1>; // ❌ Syntax Error
+
+Because `export default` must be followed by an expression, function declaration, or class declaration, not a variable declaration (`const`/`let`/`var`).
+
+✅ This works:
+
+const GreetF = () => <h1>Hi</h1>;
+export default GreetF;
+
+Conclusion:
+
+A file can have only one default export.
+When importing a default export, you can name it anything.
+
+---
+
+🅱️ Named Export & Import
+
+If you do not use `default`, then it’s a named export:
+
+// GreetF.js
+export const Header = () => <h1>This is a menu</h1>;
+export const Footer = () => <h1>© All rights reserved</h1>;
+
+Importing must use the exact exported names inside curly braces:
+
+import { Header, Footer } from "./components/GreetF";
+
+⛔ This will not work:
+
+import Header, Footer from "./components/GreetF"; // ❌ No default export, use {}
+
+✅ A file can have multiple named exports.
+
+---
+
+🆎 Mixed Export
+
+A file can have:
+
+One default export
+Multiple named exports
+
+// GreetF.js
+const GreetF = () => <h1>Hello</h1>;
+export default GreetF;
+
+export const Header = () => <h1>This is a menu</h1>;
+export const Footer = () => <h1>© All rights reserved</h1>;
+
+Import like this:
+
+import GreetF, { Header, Footer } from "./components/GreetF";
+-----X-----X-----X-----
+Styling
+=======
+There are several ways of styling a component:
+1. With Inline style object
+2. With Internal CSS object
+3. External Styling
+4. CSS Modules
+5. Bootstrap
+
+1. Inline Styles
+
+- Applied directly to elements.
+- Written as JavaScript objects.
+** CamelCase property names.
+
+
+<div style={{ color: 'blue', fontSize: '20px' }}>Hello</div>
+
+2. Internal Styles
+
+- Declare JavaScript objects
+- Use inside elements
+
+const styles = { color: 'blue', fontSize: '20px' };
+<div style={styles}>Hello</div>
+
+3. External Styles
+
+Create a separate file (style.css)
+Import and Use
+
+css
+/*styles.css */
+.title {
+  color: red;
+  font-size: 24px;
+}
+
+import './styles.css';
+<div className="title">Hello</div>
+
+4. CSS Modules
+
+- CSS scoped to a single component.
+- Prevents class name conflicts.
+
+css
+/* MyComponent.module.css */
+.title {
+  color: green;
+  font-weight: bold;
+}
+
+import styles from './MyComponent.module.css';
+<div className={styles.title}>Hello</div>
+
+5. Bootstrap
+
+✅ Step 1: Install Bootstrap
+
+npm install bootstrap
+
+✅ Step 2: Import Bootstrap CSS in Your Application
+
+// index.js or main.jsx
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+✅ Step 3: Use Bootstrap Classes in JSX
+
+Now you can directly use Bootstrap classes in your components:
+
+function App() {
+  return (
+    <div className="container mt-5">
+      <h1 className="text-primary">Hello Bootstrap in React!</h1>
+      <button className="btn btn-success">Click Me</button>
+    </div>
+  );
+}
+
+-----X-----X-----X-----
+Images
+======
+
+📁 Folder Structure Setup
+
+Before accessing images, organize them properly:
+
+my-react-app/
+│
+├── public/
+│   └── images/
+│       └── logo.png         ← Public image
+│
+├── src/
+│   └── assets/
+│       └── images/
+│           └── profile.jpg  ← Asset image
+│
+└── App.jsx or App.js
+
+🌐 1. Accessing Images from `public/images/`
+
+#✅ Use When:
+
+* You don’t want to import the image.
+* You want the image to be accessible by URL path directly (like favicon, logos, etc.).
+
+#📌 Placement:
+
+Place your image inside:
+
+public/images/
+
+#✅ How to Access:
+
+jsx
+<img src="/images/logo.png" alt="Logo" />
+
+> 🔸 Path starts with a slash `/` because it’s relative to the public root URL.
+> ❌ Do not use `import` for public images.
+
+---
+
+📦 2. Accessing Images from `src/assets/images/`
+
+#✅ Use When:
+
+* You want the image to be imported and bundled/optimized by the build tool.
+
+#📌 Placement:
+
+Place your image inside:
+
+src/assets/images/
+
+#✅ How to Access:
+
+jsx
+import profilePic from '../assets/images/profile.jpg';
+
+function MyComponent() {
+  return <img src={profilePic} alt="Profile" />;
+}
+
+> 🔸 This is treated like a module and included during the build.
+> 🔸 Works great with Vite.
+
+---
+
+⚖️ Comparison Table
+
+| Feature            | `public/images/`                        | `src/assets/images/`     |
+| ------------------ | --------------------------------------- | -------------------------|
+| Access Style       | Via URL path (e.g., `/images/logo.png`) | Via `import` in component|
+| Build Optimization | ❌ Not optimized                        | ✅ Included & optimized in build|
+| Dynamic Imports    | ❌ Not possible                         | ✅ Possible              |
+| Use Case           | Favicons, open images in browser        | Component-specific images |
+
+---
+
+✅ Best Practice
+
+| Use `public/images/` for:  | Use `src/assets/images/` for:   |
+| -------------------------- | ------------------------------- |
+| Favicon, global logo       | Component-specific icons/images |
+| Open/static file downloads | Images used in JSX logic        |
+| External CDN-like use      | Images needing lazy-load etc.   |
+
+-----X-----X-----X-----

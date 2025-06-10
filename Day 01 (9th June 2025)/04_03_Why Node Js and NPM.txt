@@ -1,0 +1,52 @@
+Why Node Js and NPM?
+====================
+
+🧠 Why does React need Node.js and NPM, while JavaScript runs in the browser?
+
+✅ 1. JavaScript CAN run in the browser — but React is not just plain JS
+
+* Browsers can run plain HTML + JS directly.
+* But React is a library, written using JSX (which is not natively understood by browsers).
+
+---
+
+📦 2. React uses JSX – Not Native JavaScript
+
+* JSX (JavaScript XML) looks like HTML but is not valid JS.
+* Browsers don’t understand JSX → we need to convert it to plain JavaScript using a tool like Babel.
+
+---
+
+🏗️ 3. React apps need a Build Step
+
+React projects are component-based and typically use:
+
+* JSX → needs transpiling (via Babel)
+* Module imports (`import/export`) → needs bundling (via Webpack or Vite)
+* Assets (CSS, images) need to be optimized
+
+> 🛠️ This build and conversion is done before the browser runs the app. That's where Node.js comes in.
+
+---
+
+📥 4. What is Node.js used for in React?
+
+Node.js is not used to run your React code in the browser.
+
+It is used for:
+
+=> Running development tools like:
+   => `webpack`, `vite`, `babel`, `eslint`, `prettier`
+   => Babel transpiles JSX code to browzer compatible JS
+
+=> Running scripts like:
+
+  * `npm start` (start dev server)
+  * `npm run build` (build production code)
+ 
+📦 NPM (Node Package Manager) is used to:
+
+* Install React and other libraries (e.g. `react-router`, `redux`)
+* Manage all dependencies in `package.json`
+
+---

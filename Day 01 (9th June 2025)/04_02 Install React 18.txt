@@ -1,0 +1,41 @@
+Install React 18
+================
+When we run the command: `npm create vite@latest`, React 19 project is created - as vite installs the latest version.
+
+But if we want to specifically install React 18, use these steps 
+
+Step 1: Create app: `npm create vite@latest`
+
+Step 2: Open package.json, inside dependencies, change following 2 lines:
+
+"dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+}
+  
+Step 3: In the same package.json, inside devDependencies, change following 2 lines:
+
+"devDependencies": {
+"@eslint/js": "^9.25.0",
+"@types/react": "^18.2.20",      <---- Line 1
+"@types/react-dom": "^18.2.7",   <---- Line 2
+"@vitejs/plugin-react": "^4.4.1",
+"eslint": "^9.25.0",
+"eslint-plugin-react-hooks": "^5.2.0",
+"eslint-plugin-react-refresh": "^0.4.19",
+"globals": "^16.0.0",
+"vite": "^6.3.5"
+}
+
+Step 4:
+** Save the files
+** go inside the project folder: cd <project-name>
+
+Step 5: Run the command: `npm install`
+
+Step 6: Test whether the installation is successfull with command: `npm list react`
+
+** you should notice React with version 18
+
+Step 7: Run app: `npm run dev`
+-----X-----X-----X-----X-----

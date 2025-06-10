@@ -1,0 +1,398 @@
+JSX
+===
+=> JSX stands for JavaScript XML.
+=> JSX allows us to write HTML elements in JavaScript.
+=> JSX places HTML in the DOM without any createElement() and appendChild() methods. 
+=> JSX makes it easier to write and add HTML in React.
+=> It is a syntactical sugar introduced by Facebook for writing React.js components easily.
+=> It may seem to us that we are writing HTML
+
+code: 
+
+<div style={{ color: 'red' }}>
+  <h1 style={{ backgroundColor: 'blue' }}>Hi</h1>
+</div>
+
+=> But this is JSX 
+
+=> This JSX will be transpiled by Babel to:
+
+Old JSX Transform:
+
+React.createElement(
+  'div',
+  { style: { color: 'red' } },
+  React.createElement(
+    'h1',
+    { style: { backgroundColor: 'blue' } },
+    'Hi'
+  )
+);
+
+New JSX Transform:
+
+import { jsx as _jsx } from "react/jsx-runtime";
+
+/*#__PURE__*/_jsx("div", {
+  style: {
+    color: 'red'
+  },
+  children: /*#__PURE__*/_jsx("h1", {
+    style: {
+      backgroundColor: 'blue'
+    },
+    children: "Hi"
+  })
+});
+
+=> JSX is just a more readable way to write React elements.
+
+** Close all JSX tags
+
+=> In HTML we have several elements that don't have closing tags, such as <br>, <img> etc
+=> In JSX it is mandatory to close all tags, for ex: <p></p>, <br/>, <img/> etc
+-----X-----X-----X-----
+Brackets after return
+=====================
+
+The use of brackets after `return` in a React functional component affects how JSX is interpreted, and it's a common source of confusion.
+
+---
+
+✅ 1. Correct Use — JSX on the same line as `return`
+
+
+const MyComponent = () => {
+  return (
+    <div>
+      <h1>Hello</h1>
+    </div>
+  );
+};
+
+
+✔️ This is the recommended pattern:
+
+You use parentheses `()` to group the JSX.
+The JSX starts immediately after the `return`.
+
+---
+
+⚠️ 2. Common Mistake — Line break after `return`
+
+
+const MyComponent = () => {
+  return
+    <div>
+      <h1>Hello</h1>
+    </div>;
+};
+
+
+❌ This does not work the way you expect.
+
+Why? Because JavaScript automatically inserts a semicolon after `return`, making it equivalent to:
+
+return;
+
+So nothing gets returned — this component returns `undefined`, and React renders nothing (or may throw an error).
+
+---
+
+🔍 Best Practices
+
+| Use case                                    | Should you use `()` after return?      |
+| ------------------------------------------- | -------------------------------------- |
+| Returning JSX                               | ✅ Yes — wrap in parentheses, same line |
+| Returning non-JSX (e.g., a number, boolean) | ❌ Not required                         |
+
+---
+
+✅ Safer Pattern
+
+Always do:
+
+
+return (
+  <div>
+    <h1>Hello</h1>
+  </div>
+);
+
+
+Avoid:
+
+
+return
+(
+  <div>...</div>
+);
+-----X-----X-----X-----
+Parent Element
+==============
+=> If we want to return single statement in JSX, its fine.
+
+=> For ex: 
+
+	return (
+		<h1>Hello, World</h1>
+	);
+
+=> But if we want to return multiple statements, React will throw an error.
+
+=> This is due to the reason, that we can return only 1 element from the component.
+
+=> In order to do so we must wrap up multiple statments under one parent element
+
+=> So,
+
+	return (
+		<div>
+			<h1>Heading 1</h1>
+			<h2>Heading 2</h2>
+			<p>Content</p>
+		</div>
+	)
+-----X-----X-----X-----
+React Fragments
+===============
+=> When we have multiple components nested inside each other, so many unnecessary divs are accumulated
+=> To fix this React 16 introduced Fragments, which allow components to return multiple elements without adding extra nodes to the DOM
+=> The above can now be re-written as:
+
+	import React from "react";
+	
+	return (
+		<React.Fragment>
+			<h1>Heading 1</h1>
+			<h2>Heading 2</h2>
+			<p>Content</p>
+		</React.Fragment>
+	)
+
+=> Or use the shortcut: <> </>
+
+ 	// No need to import React from "react";
+
+	return (
+		<>
+			<h1>Heading 1</h1>
+			<h2>Heading 2</h2>
+			<p>Content</p>
+		</>
+	)
+	
+So, why Use React.Fragment in a Component?  
+
+1. Avoids Extra DOM Nodes – Prevents unnecessary `<div>` wrappers, keeping the DOM clean.  
+2. Improves Performance – Reduces extra elements, leading to better rendering efficiency.  
+3. Required for Multiple Elements – Allows returning multiple elements from a component without adding a parent wrapper.  
+4. Supports Key Prop – `<Fragment>` can take a `key` prop when used inside lists.  
+5. Shorthand Available – Can be written as `<>...</>` for cleaner code.  
+----X-----X-----X-----
+Dynamic Values in JSX
+=====================
+In React, `{}` (curly braces) are used inside JSX to embed JavaScript expressions.
+
+1. Allowed: JavaScript Expressions
+We can use `{}` to insert any valid JavaScript expression (not statements) inside JSX.
+
+Examples of valid expressions:
+- Variables  
+
+  const name = "Kaustubh";
+  <h1>Hello, {name}!</h1> // Output: Hello, Kaustubh!
+  
+- Function calls  
+  
+  function getGreeting() {
+    return "Good Morning!";
+  }
+  <h1>{getGreeting()}</h1> // Output: Good Morning!
+  
+- Mathematical operations  
+  
+  <p>Sum: {10 + 20}</p> // Output: Sum: 30
+  
+- String concatenation  
+  
+  const firstName = "John";
+  <h2>{"Hello, " + firstName}</h2> // Output: Hello, John
+  
+- Ternary operators (for conditional rendering)  
+  
+  const isLoggedIn = true;
+  <p>{isLoggedIn ? "Welcome!" : "Please log in"}</p>
+  
+- Logical operators (`&&`)  
+  
+  const showMessage = true;
+  <p>{showMessage && "This message is visible"}</p> // Output: This message is visible
+  
+- Array methods (like `map()`)  
+  
+  const fruits = ["Apple", "Banana", "Cherry"];
+  <ul>
+    {fruits.map(fruit => <li key={fruit}>{fruit}</li>)}
+  </ul>
+
+2. Not Allowed: JavaScript Statements
+
+Statements (which do not return values) cannot be used inside `{}`.
+
+Examples of invalid statements:
+
+if-else statement  
+
+// Invalid JSX
+❌ <p>{if (isLoggedIn) { "Welcome!" } else { "Please log in" }}</p>
+
+Fix: Use a ternary operator  
+
+✅ <p>{isLoggedIn ? "Welcome!" : "Please log in"}</p>
+
+
+❌ Loops (`for`, `while`)  
+
+// Invalid JSX
+<ul>
+  {for (let i = 0; i < items.length; i++) {
+    <li>{items[i]}</li>;
+  }}
+</ul>
+
+✅ Fix: Use `.map()`  
+
+<ul>
+  {items.map(item => <li key={item}>{item}</li>)}
+</ul>
+
+
+❌ Variable declarations  
+
+// Invalid JSX
+<p>{let age = 25; age}</p>
+
+✅ Fix: Declare variables outside JSX  
+
+const age = 25;
+<p>{age}</p>
+
+
+3. Using `{}` in JSX Attributes
+Curly braces can also be used in JSX attributes, but only for expressions (not strings).
+
+✅ Valid usage:  
+
+<img src={profilePicUrl} alt="Profile Picture" />
+
+❌ Invalid usage (string literals should use quotes, not `{}`):  
+
+<img src={"profile.jpg"} />  // Incorrect
+<img src="profile.jpg" />   // Correct
+
+
+4. Using `{}` to Embed Components
+We can embed React components using `{}`:
+
+function Welcome() {
+  return <h1>Welcome to React!</h1>;
+}
+
+function App() {
+  return (
+    <div>
+      <Welcome />  {/Component inside JSX */}
+    </div>
+  );
+}
+
+Conclusion
+- `{}` allows embedding JavaScript expressions inside JSX.
+- Expressions return values (like variables, functions, operations, ternary operators, etc.).
+- Statements do not return values and cannot be used inside `{}`.
+- `{}` can also be used inside JSX attributes.
+-----X-----X-----X-----
+React Conditional rendering
+===========================
+
+🔹 What is Conditional Rendering?  
+Conditional rendering in React means displaying UI elements based on conditions, similar to `if-else` statements in JavaScript. Instead of rendering everything, React only renders components or elements that meet a condition.  
+
+🔹 Ways to Perform Conditional Rendering  
+
+1. Using Ternary Operator (`condition ? true : false`)
+👉 Best for inline conditional rendering.  
+
+const isLoggedIn = true;
+<p>{isLoggedIn ? "Welcome, User!" : "Please log in"}</p>
+
+
+2. Using Logical AND (`&&`)
+👉 Best for rendering an element only when the condition is `true`.  
+
+const showMessage = true;
+{showMessage && <p>This message is visible</p>}
+
+ In order to know more about &&, see notes: 03_02_How_&&_Works.txt
+
+3. Using `if-else` (Function-Based Rendering)
+👉 Best for complex conditions.  
+
+function getMessage(isLoggedIn) {
+  if (isLoggedIn) {
+    return <h2>Welcome, User!</h2>;
+  } else {
+    return <h2>Please log in</h2>;
+  }
+}
+{getMessage(true)}
+
+4. Conditional Component Rendering
+👉 Best for switching between components.  
+
+function UserDashboard() {
+  return <h3>Dashboard: Welcome User</h3>;
+}
+function GuestMessage() {
+  return <h3>Please sign in</h3>;
+}
+const isLoggedIn = true;
+{isLoggedIn ? <UserDashboard /> : <GuestMessage />}
+
+5. Returning `null` to Hide a Component
+👉 Best for completely removing a component from the DOM.  
+
+function WarningMessage({ showWarning }) {
+  if (!showWarning) {
+    return null; // Hides component
+  }
+  return <p>⚠ Warning: Action required!</p>;
+}
+<WarningMessage showWarning={false} />
+
+🔹 Key Takeaways
+✔ React allows conditionally rendering elements or components based on state, props, or logic.  
+✔ `? :` (ternary), `&&` (logical AND), `if-else`, and `null` are common techniques.  
+✔ Returning `null` removes the component from the DOM instead of hiding it.  
+✔ Helps optimize performance by rendering only necessary elements.  
+
+-----X-----X-----X-----
+Looping in JSX
+==============
+=> We don’t have for loops in JSX, so we have to use .map() method of arrays.
+
+return (
+	<ul>
+		{
+			students.map(
+				(student) => (
+					<li key={student}>{student}</li>
+				)
+			)
+		}
+	</ul>
+)
+ 
+React will complain if we dont pass key prop to li
+-----X-----X-----X-----X-----
