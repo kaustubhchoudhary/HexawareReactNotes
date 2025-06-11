@@ -245,8 +245,6 @@ You can pass arguments using arrow functions:
 ----X-----X-----X-----
 Event Propagation
 =================
-Event Propagation
-=================
 
 1. What is Event Propagation?
 
@@ -580,12 +578,219 @@ constructor(props) {
 
    * `constructor()` → `render()` → `componentDidMount()`
 
-2. On button click:
+2. On button click(state change):
 
    * `shouldComponentUpdate()` → `render()` → `componentDidUpdate()`
 
 3. On removal:
 
    * `componentWillUnmount()`
+   
+API Call in Class Component
+===========================
+Let us do an API call in Class component:
+
+Step 1: Install Axios
+
+**Command : npm install axios
+
+Step 2: In Class component, inside constructor take a state property => empty users array:
+
+this.state = {
+  count: 0,
+  users: [],
+};
+
+Step 3: In the render method, print users array data using map() - Print only id and name
+
+Step 4: Call api in componentDidMount() and modify the state object users.
+
+axios.get().then().catch()
+
+Flow
+====
+constructor is called : state object with empty users array is initialized
+ 
+render() is called with empty users data, so obviously nothing is displayed
+
+componentDidMount () is called and
+	-> user data is fetched through axios, and 
+	-> state => user object updated
+	
+shouldComponentUpdate will run because it has noticed a change in state
+
+render will again get called and user data will be displayed with new data from api
+
+componentDidUpdate will notify that component is updated
+
+** Caution never place api calls in constructor, render or any other method apart from componentDidMount()
+
+---
+
+API Calls in Class Component
+============================
+
+📘 Notes: Where to Fetch API Data in Class Components
+
+In React class components, API calls should be made only in specific lifecycle methods where it's safe and makes logical sense. Using `fetch` or `axios` in the wrong place can lead to bugs like infinite loops, broken UI, or memory leaks.
+
+---
+
+✅ Best Place to Fetch API Data
+
+🔹 `componentDidMount()`
+
+* When it's called: After the component renders for the first time and is mounted in the DOM.
+* Why it's ideal:
+
+  * The DOM is ready.
+  * You can safely use `setState()` without causing infinite loops.
+  * It's called only once, so you don't accidentally make multiple API requests.
+
+```jsx
+componentDidMount() {
+  axios.get("https://api.example.com/data")
+    .then(response => this.setState({ data: response.data }))
+    .catch(error => console.error(error));
+}
+```
+
+---
+
+❌ Places to Avoid Fetching API Data
+
+🔹 `constructor()`
+
+* Why not: The component hasn’t rendered yet. State is being initialized. Avoid async calls here.
+
+🔹 `render()`
+
+* Why not: This method must be pure (no side effects). API calls here will:
+
+  * Run on every render
+  * Cause infinite loops if `setState()` is called
+
+🔹 `componentDidUpdate()` (⚠️ Use only with condition)
+
+* Why not directly: It runs after every update, so calling `setState()` without a condition will cause infinite re-renders.
+* ✅ Use it only if you're fetching based on a change in props/state, and wrap it in an `if` condition.
+
+```jsx
+componentDidUpdate(prevProps, prevState) {
+  if (prevState.id !== this.state.id) {
+    // Safe to fetch
+  }
+}
+```
+
+---
+
+Summary:
+
+📘 Where to Fetch API Data in Class Components
+
+#✅ Fetch API in:
+
+componentDidMount
+=> Best place to fetch data
+=> Runs once after the first render
+=> Safe to call `setState` here
+
+componentDidUpdate
+=> Use only with a condition
+=> Useful if API depends on updated props or state
+=> Must guard with `if` to avoid infinite loops
+
+---
+
+#❌ Do NOT fetch API in:
+
+constructor
+=> Component isn’t ready
+=> Only meant for initializing state and binding methods
+
+render
+=> Must be pure
+=> No side effects like API calls allowed
+
+shouldComponentUpdate
+=> Used for performance optimization
+=> Not meant for side effects like fetching
+
+---
+
+🧠 Rule of Thumb:
+
+> Always fetch API data in componentDidMount() unless you need to respond to a specific change — then use a guarded componentDidUpdate().
+-----X-----X-----X-----
+The useEffect hook
+==================
+
+✅ What is `useEffect`?
+
+`useEffect` is a React Hook that allows you to perform side effects in functional components — like fetching data, updating the DOM, setting timers, and more.
+
+---
+
+🔍 Syntax
+
+```js
+useEffect(() => {
+  // Side effect code here
+  return () => {
+    // Cleanup (optional)
+  };
+}, [dependencyArray]);
+```
+
+---
+
+📌 When does `useEffect` run?
+
+| Dependency Array | When It Runs                                                    |
+| ---------------- | --------------------------------------------------------------- |
+| No array         | After every render                                          |
+| `[]` empty array | Only once after the first render (like `componentDidMount`) |
+| `[someState]`    | Runs on first render and whenever `someState` changes       |
+| Cleanup function | Runs before re-running effect or on unmount                     |
+
+---
+
+🔁 Class vs Functional Lifecycle Comparison
+
+| Class Component        | Functional Component                  |
+| ---------------------- | ------------------------------------- |
+| `constructor`          | Variable/state initialization         |
+| `render`               | JSX returned in function              |
+| `componentDidMount`    | `useEffect(() => {}, [])`             |
+| `componentDidUpdate`   | `useEffect(() => {}, [dependencies])` |
+| `componentWillUnmount` | `return () => {}` inside `useEffect`  |
+
+---
+
+🔍 Console Output Flow
+
+When a functional component runs, you'll see this order:
+
+🔁 Functional Component Rendered
+🟢 useEffect - ComponentDidMount
+📥 Data Fetched
+🔁 Functional Component Rendered (again after setState)
+🟡 useEffect - ComponentDidUpdate (users updated)
+
+If the component is removed from the screen:
+
+```plaintext
+🔴 useEffect Cleanup - ComponentWillUnmount
+```
+
+---
+
+🧠 Key Takeaways
+
+* `useEffect(() => {}, [])` is the most common form — for fetching data.
+* Add dependencies in the array to react to specific state or prop changes.
+* Always be careful of infinite loops (just like with `componentDidUpdate`).
+* `return () => {}` inside useEffect is for cleanup, like removing intervals, listeners, etc.
 
 -----X-----X-----X-----
