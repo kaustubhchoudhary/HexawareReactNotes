@@ -1,5 +1,91 @@
 Day 03 Notes
 ============
+Objects
+=======
+✅ 1. General Object Definition
+
+An object in programming is a collection of related data and/or functionalities (which usually consist of variables and functions).
+
+* It represents a real-world entity with properties (data) and behaviors (methods).
+
+🧠 Analogy:
+Think of a car:
+
+* Properties: color, brand, model
+* Behaviors: start(), drive(), stop()
+
+---
+
+✅ 2. JavaScript Object Definition
+
+In JavaScript, an object is a data type used to store key-value pairs.
+
+* Keys are always strings (or Symbols), and the values can be anything: string, number, array, function, or even another object.
+
+📌 Syntax:
+
+const car = {
+  brand: "Toyota",
+  model: "Innova",
+  color: "White",
+  start: function () {
+    console.log("Car started");
+  }
+};
+
+
+💡 Accessing Properties:
+
+```javascript
+console.log(car.brand);   // Toyota
+car.start();              // Car started
+```
+
+---
+
+✅ 3. DOM Object Definition
+
+The DOM (Document Object Model) is a tree-like structure representing the HTML of a web page, where each HTML element is treated as a JavaScript object.
+
+* These objects are accessible via JavaScript and can be manipulated (e.g., change text, color, size, etc.).
+
+📌 Example:
+
+```html
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1 id="title">Welcome Students</h1>
+    <script>
+      // Access the DOM object
+      const heading = document.getElementById("title");
+
+      // DOM object has properties and methods
+      console.log(heading.innerText);        // Welcome Students
+      heading.innerText = "Hello, JavaScript!"; // Modify the content
+    </script>
+  </body>
+</html>
+```
+
+🧠 In this example:
+
+* `heading` is a DOM object representing the `<h1>` element.
+* `.innerText` is a property.
+* `document.getElementById()` is a method to access a DOM object.
+
+---
+
+🔁 Summary Table:
+
+| Type              | What it Represents       | Example                           |
+| ----------------- | ------------------------ | --------------------------------- |
+| General Object    | Real-world entity        | Car with properties & behaviors   |
+| JavaScript Object | Key-value data structure | `{ name: "Riya", age: 21 }`       |
+| DOM Object        | HTML element in JS form  | `document.getElementById("demo")` |
+
+---
+
 Props
 =====
 ✅ What are Props?
@@ -115,7 +201,7 @@ Events are actions or occurrences that happen in the system we are programming, 
 
 2. Event Handling in React
 
-=> React uses synthetic events, a cross-browser wrapper **object** around the browser's native event system. 
+=> React uses synthetic events, a cross-browser wrapper object around the browser's native event system. 
 => This ensures that events behave consistently across all browsers.
 
 3. Event Naming Convention
@@ -257,24 +343,24 @@ You have a nested React structure like this:
 
 Each level has both:
 
-* `onClickCapture` (for **capturing phase**)
-* `onClick` (for **bubbling phase**)
+* `onClickCapture` (for capturing phase)
+* `onClick` (for bubbling phase)
 
 ---
 
 ## ⚙️ What happens when you click the button?
 
-### 🔁 Execution Order:
+🔁 Execution Order:
 
-1. React starts from the **topmost ancestor** and goes **down to the target** → **Capturing Phase**
+1. React starts from the topmost ancestor and goes down to the target → Capturing Phase
 
    * `GrandParent onClickCapture`
    * `Parent onClickCapture`
    * `Child onClickCapture`
 
-2. Then it hits the **target element** (e.g., `<button>`)
+2. Then it hits the target element (e.g., `<button>`)
 
-3. Then React bubbles **upward from the target’s parent** → **Bubbling Phase**
+3. Then React bubbles upward from the target’s parent → Bubbling Phase
 
    * `Child onClick`
    * `Parent onClick`
@@ -300,7 +386,7 @@ GrandParent (Bubble)
 
 ---
 
-### 🧠 Summary Table
+🧠 Summary Table
 
 | Phase           | Order         | React Prop       |
 | --------------- | ------------- | ---------------- |
