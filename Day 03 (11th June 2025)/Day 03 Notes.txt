@@ -1,0 +1,505 @@
+Day 03 Notes
+============
+Props
+=====
+✅ What are Props?
+
+> Props (short for "properties") are used to pass data from one component to another (typically from parent to child).
+
+> They work like function parameters.
+
+> The props of a component can be shown with React DevTools
+
+🧱 Syntax
+
+#1. Parent Component (passing props):
+
+jsx:
+
+<App>
+	<Greet name="Kaustubh" />
+</App>
+
+#2. Child Component (receiving props):
+
+jsx:
+const Greet = (props) => {
+  return <h1>Hello, {props.name}!</h1>;
+};
+
+---
+
+🎯 Key Points
+
+| Feature             | Description                                                  |
+| ------------------- | ------------------------------------------------------------ |
+| ✅ Read-only     | Props are immutable (you can’t modify them inside the child) |
+| 🔁 Reusable     | Allows components to be reused with different values         |
+| 📤 One-way flow | Data flows only from parent to child                     |
+
+---
+
+🧠 Destructuring Props (Cleaner Code)
+
+Instead of using `props.name`, destructure directly:
+
+jsx:
+const Greet = ({ name }) => {
+  return <h1>Hello, {name}</h1>;
+};
+
+
+---
+
+💡 Example
+
+jsx:
+function App() {
+  return (
+    <div>
+      <Greet name="Amit" />
+      <Greet name="Sneha" />
+    </div>
+  );
+}
+
+const Greet = ({ name }) => {
+  return <p>Welcome, {name}!</p>;
+};
+
+
+#🖥️ Output:
+
+Welcome, Amit!
+Welcome, Sneha!
+
+---
+
+🔐 Why Use Props?
+
+* To make components dynamic
+* To build reusable UI blocks
+* To follow component-based design
+
+---
+
+🚫 What Props Can't Do:
+
+* You can’t change props inside the child component
+* Props do not support two-way binding by default
+
+---
+Debugging
+=========
+=> After app execution, on the browser open dev tools -> console window.
+
+=> You will notice: Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+
+=> Click it and then Install it for your browser: Chrome/Edge
+
+=> Post installation, open dev tools, re-run the app and notice react icons or component text in parent menu.
+=> Click on components, and we see "App", Click on "App" and observe little details
+
+=> Create any new component: <Hi/> & use it inside <App/>, refresh the browser & see component hierarchy in dev tools
+----X-----X-----X-----
+Events in React
+===============
+1. What are Events?
+
+Events are actions or occurrences that happen in the system we are programming, which the system tells you about so your code can react to them. Examples include:
+
+=> User clicks a button
+=> User types in an input
+=> Form is submitted
+=> Mouse moves over an element
+
+2. Event Handling in React
+
+=> React uses synthetic events, a cross-browser wrapper **object** around the browser's native event system. 
+=> This ensures that events behave consistently across all browsers.
+
+3. Event Naming Convention
+
+=> React events are named using camelCase (e.g., `onClick`, `onChange`).
+=> In HTML, events are lowercase (e.g., `onclick`, `onchange`).
+
+4. Adding Event Handlers
+
+* You add event handlers directly in JSX by passing a function reference.
+* Example:
+
+```jsx
+<button onClick={handleClick}>Click Me</button>
+```
+
+5. Handling Events with Parameters
+
+You can pass arguments using arrow functions:
+
+```jsx
+<button onClick={() => handleDelete(id)}>Delete</button>
+```
+
+6. Passing data and event
+```jsx
+<button onClick={(e) => handleDelete(id, e)}>Delete</button>
+```
+
+7. Common React Events
+
+| Event       | Description                    |
+| ----------- | ------------------------------ |
+| `onClick`   | Mouse click event              |
+| `onChange`  | Change event (inputs, selects) |
+| `onSubmit`  | Form submission                |
+| `onKeyDown` | Key press down                 |
+| `onFocus`   | Element gains focus            |
+| `onBlur`    | Element loses focus            |
+
+----X-----X-----X-----
+Event Propagation
+=================
+Event Propagation
+=================
+
+1. What is Event Propagation?
+
+When you click an element inside nested elements, the event travels through the DOM tree in phases:
+
+Capturing Phase: Event travels from root to target (rarely used directly)
+Target Phase: Event hits the target element
+Bubbling Phase: Event bubbles up from target back up to root
+
+By default, React events bubble, meaning parent handlers get called after child handlers unless stopped.
+
+---
+
+2. React’s Synthetic Event System
+
+* React uses its own SyntheticEvent wrapper over native events for consistency.
+* You get `event.stopPropagation()` and `event.preventDefault()` in React event handlers.
+* You can control bubbling with these methods.
+
+---
+
+3. Demo Component: `EventPropagationDemo.jsx`
+
+import React from "react";
+
+const EventPropagationDemo = () => {
+  const handleOuterClick = (e) => {
+    alert("Outer DIV clicked! (Bubbling phase)");
+  };
+
+  const handleInnerClick = (e) => {
+    alert("Inner DIV clicked! (Target phase)");
+    // Uncomment below to stop bubbling
+    // e.stopPropagation();
+  };
+
+  return (
+    <div onClick={handleOuterClick}>
+      Outer DIV (click me or inner div)
+      <div onClick={handleInnerClick}>
+        Inner DIV (click me)
+      </div>
+    </div>
+  );
+};
+
+export default EventPropagationDemo;
+```
+
+---
+
+4. What Happens?
+
+* Click Inner DIV:
+  First `handleInnerClick` runs → Then `handleOuterClick` runs (bubbling)
+
+* Click Outer DIV (outside inner div):
+  Only `handleOuterClick` runs
+
+* If you call `e.stopPropagation()` inside `handleInnerClick`, then clicking inner div won’t bubble to outer div
+
+---
+
+5. Bonus: Event Capturing in React
+
+React does not have native support for event capturing phase listeners like native DOM.
+
+But you can use native event listeners with `capture: true` via `useEffect` or `addEventListener`.
+
+---
+
+Summary:
+
+| Term             | Meaning                                   | React Usage                   |
+| -----------------| ----------------------------------------- | ----------------------------- |
+| Event Bubbling   | Event propagates from target upward       | Default React event handling phase       |
+| Event Capturing  | Event propagates from root down to target | Not directly supported by React handlers |
+| stopPropagation()| Stops event bubbling                      | Use in handler to prevent parent calls   |
+
+---
+Bubbling and Capturing Together
+===============================
+🔬 Scenario:
+
+You have a nested React structure like this:
+
+<GrandParent onClickCapture={} onClick={}>
+  <Parent onClickCapture={} onClick={}>
+    <Child onClickCapture={} onClick={}>
+      <button>Click Me</button>
+    </Child>
+  </Parent>
+</GrandParent>
+
+Each level has both:
+
+* `onClickCapture` (for **capturing phase**)
+* `onClick` (for **bubbling phase**)
+
+---
+
+## ⚙️ What happens when you click the button?
+
+### 🔁 Execution Order:
+
+1. React starts from the **topmost ancestor** and goes **down to the target** → **Capturing Phase**
+
+   * `GrandParent onClickCapture`
+   * `Parent onClickCapture`
+   * `Child onClickCapture`
+
+2. Then it hits the **target element** (e.g., `<button>`)
+
+3. Then React bubbles **upward from the target’s parent** → **Bubbling Phase**
+
+   * `Child onClick`
+   * `Parent onClick`
+   * `GrandParent onClick`
+
+---
+
+📋 Final Order of Logs:
+
+If all handlers log something, you’ll get this:
+
+GrandParent (Capture)
+Parent (Capture)
+Child (Capture)
+Child (Bubble)
+Parent (Bubble)
+GrandParent (Bubble)
+
+✅ Why? Because React strictly follows the DOM event flow order:
+
+* Capturing top → down
+* Bubbling bottom → up
+
+---
+
+### 🧠 Summary Table
+
+| Phase           | Order         | React Prop       |
+| --------------- | ------------- | ---------------- |
+| Capturing phase | Outer → Inner | `onClickCapture` |
+| Target          | —             | —                |
+| Bubbling phase  | Inner → Outer | `onClick`        |
+
+
+📌 Capturing has higher priority in terms of execution order — it runs before bubbling.
+
+🧠 What “higher priority” means in event flow:
+When an event is triggered (like a click), the browser (and React’s synthetic event system) goes through three phases:
+
+Capturing Phase → from root to the target
+
+Target Phase → event reaches the target
+
+Bubbling Phase → from target back up to root
+
+So, any handler in the capturing phase will run before the bubbling handlers.
+
+🧩 Important Clarification:
+🟡 It doesn’t mean capturing can "override" bubbling — both will still run unless you stop the propogation.
+
+So, in summary:
+
+| Concept          | Capture Phase                         | Bubble Phase                      |
+| ---------------- | ------------------------------------- | --------------------------------- |
+| Execution Order  | Runs first                        | Runs after capture + target   |
+| React Prop       | `onClickCapture`                      | `onClick`                         |
+| Stop propagation | Can stop event from reaching bubbling | Can stop event from continuing up |
+
+-----X-----X-----X-----
+Hooks
+=====
+
+🔰 What are Hooks in React?
+
+=> Hooks are special functions in React that let you "hook into" React features like state and lifecycle methods inside functional components.
+
+=> Before Hooks (introduced in React 16.8), only class components could use features like state or lifecycle. 
+=> Hooks make functional components powerful and stateful.
+
+---
+
+📋 Commonly Used React Hooks — Summary Table
+
+| Category           | Hook                 | Description                                      |
+|--------------------|----------------------|--------------------------------------------------|
+| Basic Hooks        | useState             | Manage local state in functional components      |
+|                    | useEffect            | Handle side effects like API calls, timers       |
+|                    | useContext           | Access values from a Context Provider            |
+|--------------------|----------------------|--------------------------------------------------|
+| Additional Hooks   | useReducer           | Manage complex state logic with a reducer        |
+|                    | useCallback          | Memoize functions to avoid re-creation           |
+|                    | useMemo              | Memoize expensive values for performance         |
+|                    | useRef               | Create mutable references to DOM or values       |
+|                    | useImperativeHandle  | Customize value exposed to parent via ref        |
+|                    | useLayoutEffect      | Like useEffect, but runs after DOM update sync   |
+|                    | useDebugValue        | Show debug info in custom hooks for DevTools     |
+|--------------------|----------------------|--------------------------------------------------|
+| Newer Hooks        | useId                | Generate unique IDs for SSR/accessibility        |
+|                    | useTransition        | Manage UI transitions without blocking rendering |
+|                    | useDeferredValue     | Defer non-urgent state updates                   |
+|                    | useSyncExternalStore | Subscribe to external stores (React 18+)         |
+|                    | useInsertionEffect   | Inject styles before paint (used in libraries)   |
+|----------------------------------------------------------------------------------------------|
+
+We will learn about useState, useEffect, useContext, useReducer 
+
+-----X-----X-----X-----
+State and useState()
+====================
+
+🧠 What is State in React?
+=> State is a special built-in object in React used to track dynamic data in a component. 
+=> When the state changes, the component re-renders to reflect the new value.
+
+---
+
+🔗 Why use `useState`?
+
+In functional components, we use the `useState` hook to create and manage state.
+
+---
+
+✅ Basic Syntax of `useState`
+
+```js
+const [value, setValue] = useState(initialValue);
+```
+
+* `value`: current state
+* `setValue`: function to update it
+* `initialValue`: starting value (number, string, object, etc.)
+
+---
+
+🗂️ Examples:
+
+* Object state update ✅
+* Array state update (add/remove items) ✅
+* Array of objects (e.g., update a student's score) ✅
+-----X-----X-----X-----
+Class Components
+================
+✅ 1. What is a Class Component?
+
+=> A Class Component in React is a component defined using an ES6 class that extends `React.Component`. 
+=> It must include a `render()` method that returns JSX.
+
+---
+
+✅ 2. Syntax:
+
+```jsx
+import React, { Component } from 'react';
+
+class MyComponent extends Component {
+  render() {
+    return <h1>Hello from Class Component</h1>;
+  }
+}
+
+---
+
+✅ 3. What is `React.Component`?
+
+=> `React.Component` is the base class from the React library. 
+=> By extending it, your class inherits built-in features like:
+	=> Lifecycle methods
+	=> `this.props`
+	=> `this.state`
+	=> `this.setState()`
+
+---
+
+✅ 4. `constructor()` and `super()`
+
+* The `constructor` initializes the component and is the first method called.
+* `super(props)` must be called to access `this.props` inside the constructor.
+
+```jsx
+constructor(props) {
+  super(props);
+  this.state = {
+    count: 0
+  };
+}
+```
+
+---
+
+✅ 5. `state` in Class Components
+
+* State is stored in `this.state`.
+* Updated using `this.setState()` which triggers re-render.
+
+---
+
+✅ 6. Lifecycle Methods – List
+
+| Method                    | Called When?                          |
+| ------------------------- | ------------------------------------- |
+| `constructor()`           | Before mounting                       |
+| `componentDidMount()`     | After component is mounted (rendered) |
+| `shouldComponentUpdate()` | Before re-rendering                   |
+| `componentDidUpdate()`    | After re-rendering                    |
+| `componentWillUnmount()`  | Before component is removed           |
+| `render()`                | On each render                        |
+
+---
+
+🧭 Lifecycle Flow Table
+
+| Phase      | Method                    | Called When                               |
+| ---------- | ------------------------- | ----------------------------------------- |
+| Mounting   | `constructor()`           | Before the component is mounted           |
+|            | `render()`                | When the UI is about to be rendered       |
+|            | `componentDidMount()`     | Right after component is added to the DOM |
+| Updating   | `shouldComponentUpdate()` | Before re-rendering due to state/props    |
+|            | `render()`                | During re-render                          |
+|            | `componentDidUpdate()`    | After the DOM is updated                  |
+| Unmounting | `componentWillUnmount()`  | Just before component is removed          |
+
+---
+
+🔄 Demo Behavior:
+
+1. On first load:
+
+   * `constructor()` → `render()` → `componentDidMount()`
+
+2. On button click:
+
+   * `shouldComponentUpdate()` → `render()` → `componentDidUpdate()`
+
+3. On removal:
+
+   * `componentWillUnmount()`
+
+-----X-----X-----X-----
