@@ -1,0 +1,80 @@
+useReducer
+==========
+The `useReducer` hook in React is a powerful alternative to `useState` when managing more complex state logic, especially when:
+
+* The state depends on the previous state
+* The logic for updating state is centralized (e.g., in a reducer function)
+* There are multiple related state variables
+
+---
+
+## ✅ Syntax:
+
+const [state, dispatch] = useReducer(reducer, initialState);
+
+* `reducer`: A function `(state, action) => newState` that defines how state should change
+* `initialState`: The initial value of the state
+* `state`: Current state value
+* `dispatch`: A function to send actions to the reducer
+
+---
+
+## ✅ Example:
+
+Let’s say we want to build a counter app that can increment, decrement, and reset the count.
+
+
+import React, { useReducer } from 'react';
+
+// 1. Reducer function
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { count: state.count + 1 };
+    case 'DECREMENT':
+      return { count: state.count - 1 };
+    case 'RESET':
+      return { count: 0 };
+    default:
+      return state;
+  }
+};
+
+// 2. Component
+const Counter = () => {
+  const [state, dispatch] = useReducer(reducer, { count: 0 });
+
+  return (
+    <div>
+      <h2>Count: {state.count}</h2>
+      <button onClick={() => dispatch({ type: 'INCREMENT' })}>+</button>
+      <button onClick={() => dispatch({ type: 'DECREMENT' })}>-</button>
+      <button onClick={() => dispatch({ type: 'RESET' })}>Reset</button>
+    </div>
+  );
+};
+
+export default Counter;
+
+
+---
+
+## ✅ Benefits of `useReducer`
+
+| Feature           | Benefit                                                            |
+| ----------------- | ------------------------------------------------------------------ |
+| Centralized logic | All update logic stays in one reducer function                     |
+| Predictable       | State transitions are explicit and easy to test                    |
+| Scalable          | Great for forms, to-do apps, and any feature with multiple actions |
+| Cleaner code      | Avoids deeply nested `useState` updates                            |
+
+---
+
+## ✅ Real-World Analogy:
+
+Think of `useReducer` like a mailbox:
+
+* You send a letter (action) to the mailbox (`dispatch`)
+* The mailman (reducer) reads it and updates the correct address (state) based on the instructions
+
+-----X-----X-----X-----

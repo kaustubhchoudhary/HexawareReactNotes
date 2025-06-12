@@ -1,0 +1,120 @@
+Context API
+===========
+
+✅ Why Context API?
+
+Normally, data flows parent → child using props.
+
+But in deeply nested components, passing props through each level (called "prop drilling") becomes hard to manage.
+
+📦 Context API lets you pass data through the component tree directly without manually passing props.
+
+---
+
+✅ Steps to Use Context API
+
+1. Create a context
+2. Wrap your component tree with a Provider
+3. Use the context value in any component with `useContext`
+
+---
+
+✅ Example: Student Score Context
+
+Let’s use this dataset:
+
+```js
+const students = [
+  { id: 1, name: "Riya", score: 85 },
+  { id: 2, name: "Amit", score: 60 },
+  { id: 3, name: "Neha", score: 95 },
+  { id: 4, name: "Kunal", score: 40 },
+];
+```
+
+---
+
+#🔶 Step 1: Create Context
+
+```jsx
+// StudentContext.js
+import { createContext } from 'react';
+
+export const StudentContext = createContext();
+```
+
+---
+
+#🔷 Step 2: Provide Context in Parent
+
+```jsx
+// App.jsx
+import React from 'react';
+import { StudentContext } from './StudentContext';
+import StudentList from './StudentList';
+
+const students = [
+  { id: 1, name: "Riya", score: 85 },
+  { id: 2, name: "Amit", score: 60 },
+  { id: 3, name: "Neha", score: 95 },
+  { id: 4, name: "Kunal", score: 40 },
+];
+
+function App() {
+  return (
+    <StudentContext.Provider value={students}>
+      <h1>Student Scores</h1>
+      <StudentList />
+    </StudentContext.Provider>
+  );
+}
+
+export default App;
+```
+
+---
+
+#🔷 Step 3: Consume Context in Child Component
+
+```jsx
+// StudentList.jsx
+import React, { useContext } from 'react';
+import { StudentContext } from './StudentContext';
+
+const StudentList = () => {
+  const students = useContext(StudentContext);
+
+  return (
+    <div>
+      {students.map((student) => (
+        <p key={student.id}>
+          {student.name} - {student.score}
+        </p>
+      ))}
+    </div>
+  );
+};
+
+export default StudentList;
+```
+
+
+✅ When to Use Context?
+
+| ✅ Use When                                    | ❌ Avoid When                            |
+|------------------------------------------------| ------------------------------------------|
+| Need to share state/data across many components| Only one or two components need the data       |
+| Themes, authentication, user data              | Passing props is simple and sufficient         |
+| Language settings, cart items in e-commerce    | For highly dynamic data, consider Redux instead|
+
+---
+
+🔁 Comparison with Props
+
+| Feature      | Props                    | Context API                 |
+| ------------ | ------------------------ | --------------------------- |
+| Data sharing | Parent to child manually | Global, through Provider    |
+| Ease         | Easy for small apps      | Better for large apps       |
+| Control      | Explicit                 | Less obvious source of data |
+
+---

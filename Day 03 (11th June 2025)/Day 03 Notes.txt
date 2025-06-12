@@ -188,6 +188,39 @@ Debugging
 
 => Create any new component: <Hi/> & use it inside <App/>, refresh the browser & see component hierarchy in dev tools
 ----X-----X-----X-----
+Prop Drilling
+=============
+🔹 Prop Drilling – Basic Definition
+
+Prop Drilling is the process of passing data (props) from a parent component to a deeply nested child component through intermediate components, even if those intermediate components don't need the data.
+
+---
+
+🔸 Example Scenario:
+
+You have:
+
+* `App` → `Parent` → `Child` → `GrandChild`
+  If `App` wants to send a prop to `GrandChild`, it has to pass it through `Parent` and `Child` – this is prop drilling.
+
+---
+
+🔸 Why it can be a problem:
+
+* Makes code harder to read and maintain
+* Intermediate components become bloated with props they don't use
+
+---
+
+🔸 Alternatives:
+
+* Context API
+* State management libraries like Redux, Zustand, etc.
+-----X-----X-----X-----
+Context API
+===========
+Refer the doc : Context API
+-----X-----X-----X-----
 Events in React
 ===============
 1. What are Events?
@@ -231,8 +264,16 @@ You can pass arguments using arrow functions:
 <button onClick={(e) => handleDelete(id, e)}>Delete</button>
 ```
 
-7. Common React Events
+Class Examples:
 
+1. handleClickSimple
+2. handleClickWithEvent
+3. handleClickWithData
+4. handleClickWithDataAndEvent
+5. handleArrowFunction
+
+Common React Events
+===================
 | Event       | Description                    |
 | ----------- | ------------------------------ |
 | `onClick`   | Mouse click event              |
@@ -592,7 +633,7 @@ Let us do an API call in Class component:
 
 Step 1: Install Axios
 
-**Command : npm install axios
+Command : npm install axios
 
 Step 2: In Class component, inside constructor take a state property => empty users array:
 
@@ -623,7 +664,7 @@ render will again get called and user data will be displayed with new data from 
 
 componentDidUpdate will notify that component is updated
 
-** Caution never place api calls in constructor, render or any other method apart from componentDidMount()
+ Caution never place api calls in constructor, render or any other method apart from componentDidMount()
 
 ---
 
@@ -794,3 +835,4 @@ If the component is removed from the screen:
 * `return () => {}` inside useEffect is for cleanup, like removing intervals, listeners, etc.
 
 -----X-----X-----X-----
+useReducer() : Refer doc userReducer()
